@@ -24,11 +24,6 @@ public class LoginPage extends BasePage<LoginPage>{
         return $(".login_logo").shouldBe(Condition.visible);
     }
 
-    public LoginPage open() {
-        Selenide.open(path());
-        return this;
-    }
-
     public LoginPage enterUsername(String username) {
         usernameInput.setValue(username);
         return this;
