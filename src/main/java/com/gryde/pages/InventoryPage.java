@@ -73,4 +73,9 @@ public class InventoryPage extends BasePage<InventoryPage>{
                 .map(item -> new ItemCardComponent(item).getPrice())
                 .toList();
     }
+
+    public CartPage goToCart() {
+        header.clickCartLink();
+        return new CartPage();
+    }
 }

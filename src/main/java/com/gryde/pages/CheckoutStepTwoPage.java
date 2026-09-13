@@ -3,6 +3,7 @@ package com.gryde.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.gryde.pages.components.CartItemComponent;
 import com.gryde.pages.components.ItemCardComponent;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class CheckoutStepTwoPage extends BasePage<CheckoutStepTwoPage>{
 
     private final SelenideElement subtotal = $(byTestId("subtotal-label"));
     private final SelenideElement finishButton = $(byTestId("finish"));
-    private final ElementsCollection items = $$(".inventory_item");
+    private final ElementsCollection items = $$(".cart_item");
 
     @Override
     protected String path() {
@@ -36,9 +37,9 @@ public class CheckoutStepTwoPage extends BasePage<CheckoutStepTwoPage>{
         return new CheckoutFinishPage();
     }
 
-    public List<ItemCardComponent> getItemsList() {
+    public List<CartItemComponent> getItemsList() {
         return items.asFixedIterable().stream()
-                .map(ItemCardComponent::new)
+                .map(CartItemComponent::new)
                 .toList();
     }
 }

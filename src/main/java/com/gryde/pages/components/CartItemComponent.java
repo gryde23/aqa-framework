@@ -20,6 +20,6 @@ public class CartItemComponent extends BaseComponent{
     }
 
     public void removeItem() {
-        root().$(".cart-button").click();
+        root().$(".cart_button").click();
     }
 }

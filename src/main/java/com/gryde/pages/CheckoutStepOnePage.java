@@ -44,6 +44,11 @@ public class CheckoutStepOnePage extends BasePage<CheckoutStepOnePage>{
         return new CheckoutStepTwoPage();
     }
 
+    public CheckoutStepOnePage failCheckout() {
+        continueButton.click();
+        return this;
+    }
+
     public String getError() {
         return error.shouldBe(Condition.visible).getText();
     }

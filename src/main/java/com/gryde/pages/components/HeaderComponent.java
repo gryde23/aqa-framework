@@ -16,9 +16,8 @@ public class HeaderComponent extends BaseComponent{
         return root().$(byTestId("shopping-cart-badge")).shouldBe(Condition.visible).getText();
     }
 
-    public CartPage clickCartLink() {
+    public void clickCartLink() {
         root().$(byTestId("shopping-cart-link")).click();
-        return new CartPage();
     }
 
     public NavigationComponent openNavBar() {
