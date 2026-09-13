@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.$$;
 public class CartPage extends BasePage<CartPage>{
 
     private final SelenideElement checkoutButton = $(byTestId("checkout"));
-    private final ElementsCollection items = $$(byTestId("inventory-item"));
+    private final ElementsCollection items = $$(".inventory-item");
 
     @Override
     protected String path() {
