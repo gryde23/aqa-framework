@@ -1,5 +1,6 @@
 package com.gryde.tests.ui;
 
+import com.codeborne.selenide.Condition;
 import com.gryde.pages.LoginPage;
 import com.gryde.tests.base.BaseUITest;
 import org.junit.jupiter.api.Test;
@@ -57,5 +58,16 @@ public class LoginTests extends BaseUITest {
         assertThat(error).isEqualTo(expectedError);
     }
 
+    @Test
+    void loginAndLogout() {
+        LoginPage page = new LoginPage()
+                .open()
+                .enterUsername("standard_user")
+                .enterPassword("secret_sauce")
+                .successLogin()
+                .openNavBar()
+                .logout();
 
+        $(byTestId("login-button")).shouldBe(Condition.visible);
+    }
 }
