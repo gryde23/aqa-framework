@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.gryde.pages.components.HeaderComponent;
 import com.gryde.pages.components.ItemCardComponent;
+import com.gryde.pages.components.NavigationComponent;
 
 import java.util.List;
 
@@ -77,5 +78,9 @@ public class InventoryPage extends BasePage<InventoryPage>{
     public CartPage goToCart() {
         header.clickCartLink();
         return new CartPage();
+    }
+
+    public NavigationComponent openNavBar() {
+        return header.openNavBar();
     }
 }
