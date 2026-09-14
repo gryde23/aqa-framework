@@ -1,6 +1,8 @@
 package com.gryde.api;
 
 import com.gryde.api.models.CreateUserRequest;
+import com.gryde.api.models.UpdateUserRequest;
+import com.gryde.api.models.User;
 import com.gryde.config.ConfigManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -44,5 +46,31 @@ public class UserApiClient {
                 .body(request)
                 .when()
                 .post(USERS_PATH);
+    }
+
+    public Response updateUser(int id, User user) {
+        return given()
+                .spec(spec)
+                .body(user)
+                .pathParam("id", id)
+                .when()
+                .put(USER_BY_ID_PATH);
+    }
+
+    public Response updateJob(int id, String job) {
+        return given()
+                .spec(spec)
+                .pathParam("id", id)
+                .body(new UpdateUserRequest(job))
+                .when()
+                .patch(USER_BY_ID_PATH);
+    }
+
+    public Response deleteUser(int id) {
+        return given()
+                .spec(spec)
+                .pathParam("id", id)
+                .when()
+                .delete(USER_BY_ID_PATH);
     }
 }
