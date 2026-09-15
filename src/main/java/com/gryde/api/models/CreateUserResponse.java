@@ -1,11 +1,12 @@
 package com.gryde.api.models;
 
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record CreateUserResponse(
         String name,
         String job,
         Integer id,
-        LocalDateTime createdAt
+        String createdAt
 ) {
 }

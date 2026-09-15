@@ -48,7 +48,7 @@ public class UserApiClient {
                 .post(USERS_PATH);
     }
 
-    public Response updateUser(int id, User user) {
+    public Response updateUser(int id, UpdateUserRequest user) {
         return given()
                 .spec(spec)
                 .body(user)

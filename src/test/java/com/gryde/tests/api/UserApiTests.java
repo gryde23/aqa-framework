@@ -1,10 +1,7 @@
 package com.gryde.tests.api;
 
 import com.gryde.api.UserApiClient;
-import com.gryde.api.models.CreateUserRequest;
-import com.gryde.api.models.CreateUserResponse;
-import com.gryde.api.models.User;
-import com.gryde.api.models.UsersListResponse;
+import com.gryde.api.models.*;
 import com.gryde.tests.base.BaseApiTest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -48,7 +45,7 @@ public class UserApiTests extends BaseApiTest {
                 .statusCode(200)
                 .body(matchesJsonSchemaInClasspath("schemas/single-user-schema.json"));
 
-        User user = response.as(User.class);
+        User user = response.jsonPath().getObject("data", User.class);
 
         assertThat(user.id()).isEqualTo(2);
     }
@@ -58,7 +55,7 @@ public class UserApiTests extends BaseApiTest {
         Response response = apiClient.getUser(999);
         response.then().statusCode(404);
 
-        assertThat(response.getBody().asString()).isEmpty();
+        assertThat(response.getBody().asString()).isEqualTo("{}");
     }
 
     @Test
@@ -79,19 +76,13 @@ public class UserApiTests extends BaseApiTest {
 
     @Test
     void updateUserCompletely_returns200() {
-        User user = new User(
-                2,
-                "email@mail.ru",
-                "Ivan",
-                "Ivanov");
+        UpdateUserRequest user = new UpdateUserRequest("baker");
 
         Response response = apiClient.updateUser(2, user);
         response.then().statusCode(200);
 
         assertThat(response.jsonPath().getString("updatedAt")).isNotBlank();
-
-        User updatedUser = response.as(User.class);
-        assertThat(updatedUser).isEqualTo(user);
+        assertThat(response.jsonPath().getString("job")).isEqualTo("baker");
     }
 
     @Test
